@@ -60,9 +60,14 @@ public class GroovyScriptExecutorSocketIO implements GroovyScriptExecutorIO {
 
     @Override
     public void reportErrorMessage(GroovyRemoteRequest groovyRemoteRequest, String msg) {
-        outputMessagePrintWriter.println(groovyRemoteRequest.errorSeparator);
-        outputMessagePrintWriter.println(msg);
-        outputMessagePrintWriter.flush();
+        if(groovyRemoteRequest.errorSeparator == null) { //Request XML failed to parse
+            outputErrorMessageStream.println(msg);
+            outputErrorMessageStream.flush();
+        } else {
+            outputMessagePrintWriter.println(groovyRemoteRequest.errorSeparator);
+            outputMessagePrintWriter.println(msg);
+            outputMessagePrintWriter.flush();
+        }
     }
 
     @Override

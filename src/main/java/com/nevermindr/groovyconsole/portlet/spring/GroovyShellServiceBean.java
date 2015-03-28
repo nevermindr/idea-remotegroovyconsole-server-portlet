@@ -45,7 +45,6 @@ public class GroovyShellServiceBean implements InitializingBean, DisposableBean,
 
     @Override
     public void afterPropertiesSet() throws Exception {
-
         service = new GroovyShellSocketServer(port, host);
         service.setApplicationContext(applicationContext);
         if (launchAtStart) {

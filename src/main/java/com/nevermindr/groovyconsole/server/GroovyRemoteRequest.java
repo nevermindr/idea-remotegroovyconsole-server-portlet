@@ -12,7 +12,7 @@ import java.io.*;
 class GroovyRemoteRequest {
     public String fullScript;
     @SuppressWarnings("unused")
-    public String executeString;
+    public String selectedScript;
 
     public String returnSeparator;
     public String errorSeparator;
@@ -34,8 +34,8 @@ class GroovyRemoteRequest {
         NodeList nList = xmlDoc.getElementsByTagName("fullScript");
         this.fullScript = nList.item(0).getTextContent();
 
-        nList = xmlDoc.getElementsByTagName("executeString");
-        this.executeString = nList.item(0).getTextContent();
+        nList = xmlDoc.getElementsByTagName("selectedScript");
+        this.selectedScript = nList.item(0).getTextContent();
 
         this.returnSeparator = xmlDoc.getElementsByTagName("returnSeparator").item(0).getTextContent();
         this.errorSeparator = xmlDoc.getElementsByTagName("errorSeparator").item(0).getTextContent();
