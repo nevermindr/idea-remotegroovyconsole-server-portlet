@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.bosch.lr62.maven</groupId>
-        <artifactId>liferay-base</artifactId>
-        <version>1.0.3</version>
-    </parent>
-
+    <groupId>com.nevermindr.liferay.idea</groupId>
     <artifactId>idea-remotegroovyconsole-server</artifactId>
     <packaging>war</packaging>
     <name>Liferay portlet, containing server for "Remote Groovy Console" IDEA Plugin</name>
@@ -16,6 +11,11 @@
 
     <properties>
         <liferay.plugin.type>portlet</liferay.plugin.type>
+        <!-- Liferay default properties -->
+        <liferay.version>6.2.10.11</liferay.version>
+        <liferay.maven.plugin.version>6.2.10.11</liferay.maven.plugin.version>
+
+        <java-version>1.7</java-version>
     </properties>
 
     <dependencies>
@@ -34,8 +34,76 @@
             <artifactId>spring-web</artifactId>
             <version>3.1.1.RELEASE</version>
         </dependency>
+
+        <!-- liferay base dependencies -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.2</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.liferay.maven.plugins</groupId>
+                    <artifactId>liferay-maven-plugin</artifactId>
+                    <version>${liferay.maven.plugin.version}</version>
+                    <configuration>
+                        <!--<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>-->
+                        <!--<appServerDeployDir>${liferay.app.server.deploy.dir}</appServerDeployDir>-->
+                        <!--<appServerLibGlobalDir>${liferay.app.server.lib.global.dir}</appServerLibGlobalDir>-->
+                        <!--<appServerPortalDir>${liferay.app.server.portal.dir}</appServerPortalDir>-->
+                        <liferayVersion>${liferay.version}</liferayVersion>
+                        <pluginType>${liferay.plugin.type}</pluginType>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <filtering>true</filtering>
+                            <directory>src/main/webapp/WEB-INF/</directory>
+                            <targetPath>WEB-INF</targetPath>
+                            <includes>
+                                <include>liferay-plugin-package.*</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.1</version>
+            </plugin>
+        </plugins>
     </build>
 </project>
