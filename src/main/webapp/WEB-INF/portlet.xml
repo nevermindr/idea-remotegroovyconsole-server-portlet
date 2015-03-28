@@ -9,10 +9,6 @@
         <portlet-name>idea-remotegroovyconsole-server</portlet-name>
         <display-name>Remote Groovy Console Server</display-name>
         <portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
-        <init-param>
-            <name>contextConfigLocation</name>
-            <value>/WEB-INF/idea-remotegroovyconsole-server-portlet.xml</value>
-        </init-param>
         <expiration-cache>0</expiration-cache>
         <supports>
             <mime-type>text/html</mime-type>

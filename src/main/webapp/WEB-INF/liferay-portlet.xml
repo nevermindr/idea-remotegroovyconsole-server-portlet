@@ -3,7 +3,6 @@
         "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
 
 <liferay-portlet-app>
-
     <portlet>
         <portlet-name>idea-remotegroovyconsole-server</portlet-name>
         <use-default-template>false</use-default-template>
