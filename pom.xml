@@ -12,6 +12,7 @@
     <artifactId>idea-remotegroovyconsole-server</artifactId>
     <packaging>war</packaging>
     <name>Liferay portlet, containing server for "Remote Groovy Console" IDEA Plugin</name>
+    <version>0.0.1</version>
 
     <properties>
         <liferay.plugin.type>portlet</liferay.plugin.type>
