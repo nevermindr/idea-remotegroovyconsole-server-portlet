@@ -7,5 +7,6 @@
 
     <bean class="com.nevermindr.groovyconsole.portlet.spring.GroovyShellServiceBean"
           p:port="7777"
+          p:host="localhost"
           p:launchAtStart="true"/>
 </beans>
