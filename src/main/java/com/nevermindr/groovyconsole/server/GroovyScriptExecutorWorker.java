@@ -11,7 +11,7 @@ import javax.management.modelmbean.XMLParseException;
 import java.io.IOException;
 
 class GroovyScriptExecutorWorker extends Thread {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GroovyScriptExecutorSocketIO.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GroovyScriptExecutorWorker.class);
 
     private final GroovyScriptExecutorIO io;
     private final ApplicationContext applicationContext;
