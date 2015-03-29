@@ -10,8 +10,6 @@ interface GroovyScriptExecutorIO {
 
     PrintStream getOutputErrorMessageStream();
 
-    PrintWriter getOutputMessagePrintWriter();
-
     void reportSuccessMessage(GroovyRemoteRequest groovyRemoteRequest, String msg);
 
     InputStream getInputStream() throws IOException;

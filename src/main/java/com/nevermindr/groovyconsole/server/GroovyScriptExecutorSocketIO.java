@@ -42,11 +42,6 @@ public class GroovyScriptExecutorSocketIO implements GroovyScriptExecutorIO {
     }
 
     @Override
-    public PrintWriter getOutputMessagePrintWriter() {
-        return outputMessagePrintWriter;
-    }
-
-    @Override
     public void reportSuccessMessage(GroovyRemoteRequest groovyRemoteRequest, String msg) {
         outputMessagePrintWriter.println(groovyRemoteRequest.returnSeparator);
         outputMessagePrintWriter.println(msg);
