@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 
 import javax.management.modelmbean.XMLParseException;
 import java.io.IOException;
+import java.net.Socket;
 
 class GroovyScriptExecutorWorker extends Thread {
     private static final Logger LOGGER = LoggerFactory.getLogger(GroovyScriptExecutorWorker.class);
@@ -18,10 +19,10 @@ class GroovyScriptExecutorWorker extends Thread {
 
     private final GroovyRemoteRequest groovyRemoteRequest;
 
-    public GroovyScriptExecutorWorker(GroovyScriptExecutorIO io, ApplicationContext applicationContext) {
+    public GroovyScriptExecutorWorker(Socket clientSocket, ApplicationContext applicationContext) throws IOException {
         this.groovyRemoteRequest = new GroovyRemoteRequest();
         this.applicationContext = applicationContext;
-        this.io = io;
+        this.io = new GroovyScriptExecutorSocketIO(clientSocket);
     }
 
     @Override

@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroovyShellSocketServer extends Thread {
     private static final Logger LOGGER = LoggerFactory.getLogger(GroovyShellSocketServer.class);
@@ -15,6 +17,7 @@ public class GroovyShellSocketServer extends Thread {
     private final ServerSocket serverSocket;
     private volatile boolean isRunning = true;
     private ApplicationContext applicationContext;
+    private List<GroovyScriptExecutorWorker> workersList = new ArrayList<GroovyScriptExecutorWorker>();
 
     public GroovyShellSocketServer(int listenPort, String host) throws IOException {
         serverSocket = new ServerSocket(listenPort, 0, InetAddress.getByName(host));
@@ -36,9 +39,10 @@ public class GroovyShellSocketServer extends Thread {
             try {
                 final Socket clientSocket = serverSocket.accept();
 
-                GroovyScriptExecutorIO io = new GroovyScriptExecutorSocketIO(clientSocket);
-                GroovyScriptExecutorWorker groovyScriptExecutorWorker = new GroovyScriptExecutorWorker(io, applicationContext);
+                GroovyScriptExecutorWorker groovyScriptExecutorWorker = new GroovyScriptExecutorWorker(clientSocket, applicationContext);
                 groovyScriptExecutorWorker.start();
+
+                workersList.add(groovyScriptExecutorWorker);
             } catch (Throwable t) {
                 LOGGER.error("Error: " + t);
             }
